@@ -10,7 +10,6 @@ It connects via MQTT and exposes real-time power, voltage, current, and energy m
 - MQTT-based auto-updating sensors
 - Sensor grouping under a device entity
 - Supports 3-phase current, voltage, and power
-- Optional sensor name prefix
 - Energy-compatible (works with Energy Dashboard)
 ---
 
