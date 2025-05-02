@@ -1,0 +1,71 @@
+{
+  "title": "Watts Live",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Watts Live konfiguration",
+        "description": "Indtast enhedens serienummer.",
+        "data": {
+          "name": "Serienummer",
+          "sensor_prefix": "Sensor-navnepræfiks (valgfrit)"
+        }
+      }
+    },
+    "errors": {
+      "no_data": "Ingen data modtaget fra enheden. Er serienummeret korrekt og enheden online?",
+      "mqtt_error": "MQTT er ikke tilgængelig eller kunne ikke abonnere. Sørg for, at MQTT er korrekt konfigureret."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "positive_active_energy": {
+        "name": "Energiforbrug"
+      },
+      "positive_active_power": {
+        "name": "Effekt"
+      },
+      "positive_active_power_l1": {
+        "name": "L1 effekt"
+      },
+      "positive_active_power_l2": {
+        "name": "L2 effekt"
+      },
+      "positive_active_power_l3": {
+        "name": "L3 effekt"
+      },
+      "negative_active_energy": {
+        "name": "Returneret energi"
+      },
+      "negative_active_power": {
+        "name": "Returneret effekt"
+      },
+      "negative_active_power_l1": {
+        "name": "L1 returneret effekt"
+      },
+      "negative_active_power_l2": {
+        "name": "L2 returneret effekt"
+      },
+      "negative_active_power_l3": {
+        "name": "L3 returneret effekt"
+      },
+      "voltage_l1": {
+        "name": "L1 spænding"
+      },
+      "voltage_l2": {
+        "name": "L2 spænding"
+      },
+      "voltage_l3": {
+        "name": "L3 spænding"
+      },
+      "current_l1": {
+        "name": "L1 strøm"
+      },
+      "current_l2": {
+        "name": "L2 strøm"
+      },
+      "current_l3": {
+        "name": "L3 strøm"
+      }
+    }
+  }
+}

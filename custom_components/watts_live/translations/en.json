@@ -1,0 +1,71 @@
+{
+  "title": "Watts Live",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Watts Live Configuration",
+        "description": "Enter the device serial number.",
+        "data": {
+          "name": "Serial Number",
+          "sensor_prefix": "Sensor Name Prefix (optional)"
+        }
+      }
+    },
+    "errors": {
+      "no_data": "No data received from the device. Is the serial number correct and the device online?",
+      "mqtt_error": "MQTT not available or failed to subscribe. Make sure MQTT is configured properly."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "positive_active_energy": {
+        "name": "Energy consumption"
+      },
+      "positive_active_power": {
+        "name": "Power"
+      },
+      "positive_active_power_l1": {
+        "name": "L1 power"
+      },
+      "positive_active_power_l2": {
+        "name": "L2 power"
+      },
+      "positive_active_power_l3": {
+        "name": "L3 power"
+      },
+      "negative_active_energy": {
+        "name": "Returned energy"
+      },
+      "negative_active_power": {
+        "name": "Returned power"
+      },
+      "negative_active_power_l1": {
+        "name": "L1 returned power"
+      },
+      "negative_active_power_l2": {
+        "name": "L2 returned power"
+      },
+      "negative_active_power_l3": {
+        "name": "L3 returned power"
+      },
+      "voltage_l1": {
+        "name": "L1 voltage"
+      },
+      "voltage_l2": {
+        "name": "L2 voltage"
+      },
+      "voltage_l3": {
+        "name": "L3 voltage"
+      },
+      "current_l1": {
+        "name": "L1 current"
+      },
+      "current_l2": {
+        "name": "L2 current"
+      },
+      "current_l3": {
+        "name": "L3 current"
+      }
+    }
+  }
+}
