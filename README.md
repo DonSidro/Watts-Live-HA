@@ -30,7 +30,6 @@ This integration can be installed using [HACS](https://hacs.xyz/)
 7. Search for **Watts Live** and select it from the list.
 8. Follow the prompts to complete the setup:
    - Enter the **serial number** of your Watts Live device.
-   - Optionally add a **sensor name prefix**.
    - The integration will wait for live MQTT data before completing.
 9. Restart Home Assistant to apply the changes.
 
@@ -47,8 +46,7 @@ This integration can be installed using [HACS](https://hacs.xyz/)
 
 3. Enter:
    - **Serial Number**: The unique serial number of your Watts device
-   - **Sensor Name Prefix (optional)**: e.g. `"Garage"` → sensors will be named `Garage_voltage_l1`, etc.
-
+     
 4. The system will wait up to **10 seconds** for the first MQTT message to validate the device is online.
 
 ---
@@ -78,11 +76,11 @@ With payloads like:
 
 Once connected, the following sensors will appear:
 
-- `Garage_positive_active_power` → Unit: W
-- `Garage_positive_active_energy` → Unit: kWh
-- `Garage_voltage_l1` → Unit: V
-- `Garage_current_l3` → Unit: A
-- `Garage_frequency` → Unit: Hz
+- `watts_live_positive_active_power` → Unit: W
+- `watts_live_positive_active_energy` → Unit: kWh
+- `watts_live_voltage_l1` → Unit: V
+- `watts_live_current_l3` → Unit: A
+- `watts_live_frequency` → Unit: Hz
 
 ---
 
