@@ -13,6 +13,25 @@ It connects via MQTT and exposes real-time power, voltage, current, and energy m
 - Energy-compatible (works with Energy Dashboard)
 ---
 
+## ⚠️ Prerequisites
+
+This integration depends on the **Watts Live** module being correctly configured to publish data via **MQTT**.
+
+> **Disclaimer:** This integration will not function unless the Watts Live module is properly set up to send MQTT data.
+
+### 🔧 MQTT Setup Guide
+
+You must ensure that:
+- MQTT is enabled in your Watts Live module settings.
+- The broker address, topic, and credentials (if applicable) are configured correctly.
+
+### 🎥 Video Guide
+
+Need help setting it up? Watch the step-by-step video tutorial here:  
+[📺 How to Configure Watts Live for MQTT](https://www.youtube.com/watch?v=7gwUCLs2p1w)  
+
+---
+
 ## 🛠️ Installation
 
 This integration can be installed using [HACS](https://hacs.xyz/)
