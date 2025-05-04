@@ -10,8 +10,26 @@ It connects via MQTT and exposes real-time power, voltage, current, and energy m
 - MQTT-based auto-updating sensors
 - Sensor grouping under a device entity
 - Supports 3-phase current, voltage, and power
-- Optional sensor name prefix
 - Energy-compatible (works with Energy Dashboard)
+---
+
+## ⚠️ Prerequisites
+
+This integration depends on the **Watts Live** module being correctly configured to publish data via **MQTT**.
+
+> **Disclaimer:** This integration will not function unless the Watts Live module is properly set up to send MQTT data.
+
+### 🔧 MQTT Setup Guide
+
+You must ensure that:
+- MQTT is enabled in your Watts Live module settings.
+- The broker address, topic, and credentials (if applicable) are configured correctly.
+
+### 🎥 Video Guide
+
+Need help setting it up? Watch the step-by-step video tutorial here:  
+[📺 How to Configure Watts Live for MQTT](https://www.youtube.com/watch?v=7gwUCLs2p1w)  
+
 ---
 
 ## 🛠️ Installation
@@ -30,7 +48,6 @@ This integration can be installed using [HACS](https://hacs.xyz/)
 7. Search for **Watts Live** and select it from the list.
 8. Follow the prompts to complete the setup:
    - Enter the **serial number** of your Watts Live device.
-   - Optionally add a **sensor name prefix**.
    - The integration will wait for live MQTT data before completing.
 9. Restart Home Assistant to apply the changes.
 
@@ -47,8 +64,7 @@ This integration can be installed using [HACS](https://hacs.xyz/)
 
 3. Enter:
    - **Serial Number**: The unique serial number of your Watts device
-   - **Sensor Name Prefix (optional)**: e.g. `"Garage"` → sensors will be named `Garage_voltage_l1`, etc.
-
+     
 4. The system will wait up to **10 seconds** for the first MQTT message to validate the device is online.
 
 ---
@@ -78,11 +94,11 @@ With payloads like:
 
 Once connected, the following sensors will appear:
 
-- `Garage_positive_active_power` → Unit: W
-- `Garage_positive_active_energy` → Unit: kWh
-- `Garage_voltage_l1` → Unit: V
-- `Garage_current_l3` → Unit: A
-- `Garage_frequency` → Unit: Hz
+- `watts_live_positive_active_power` → Unit: W
+- `watts_live_positive_active_energy` → Unit: kWh
+- `watts_live_voltage_l1` → Unit: V
+- `watts_live_current_l3` → Unit: A
+- `watts_live_frequency` → Unit: Hz
 
 ---
 
