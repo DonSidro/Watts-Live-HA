@@ -6,15 +6,12 @@ from homeassistant.components import mqtt
 from homeassistant.const import CONF_NAME
 from .const import DOMAIN
 
-CONF_PREFIX = "sensor_prefix"
-
 class WattsLiveConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input=None):
         errors = {}
 
         if user_input is not None:
             serial = user_input[CONF_NAME]
-            prefix = user_input.get(CONF_PREFIX, "")
             topic = f"watts/{serial}/measurement"
             event = asyncio.Event()
 
@@ -40,14 +37,13 @@ class WattsLiveConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if not errors:
                 return self.async_create_entry(
                     title=serial,
-                    data={"serial": serial, "prefix": prefix}
+                    data={"serial": serial}
                 )
 
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema({
                 vol.Required(CONF_NAME): str,
-                vol.Optional(CONF_PREFIX, default=""): str
             }),
             errors=errors
         )

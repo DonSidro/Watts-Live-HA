@@ -6,8 +6,7 @@
         "title": "Watts Live Configuration",
         "description": "Enter the device serial number.",
         "data": {
-          "name": "Serial Number",
-          "sensor_prefix": "Sensor Name Prefix (optional)"
+          "name": "Serial Number"
         }
       }
     },

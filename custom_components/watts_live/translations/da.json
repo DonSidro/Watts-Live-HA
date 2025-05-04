@@ -6,8 +6,7 @@
         "title": "Watts Live konfiguration",
         "description": "Indtast enhedens serienummer.",
         "data": {
-          "name": "Serienummer",
-          "sensor_prefix": "Sensor-navnepræfiks (valgfrit)"
+          "name": "Serienummer"
         }
       }
     },

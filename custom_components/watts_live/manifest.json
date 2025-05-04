@@ -2,7 +2,7 @@
 {
   "domain": "watts_live",
   "name": "Watts Live",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "documentation": "https://github.com/DonSidro/Watts-Live-HA",
   "requirements": [],
   "dependencies": ["mqtt"],
