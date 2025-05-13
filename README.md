@@ -1,7 +1,5 @@
 # 🔌 Watts Live - Home Assistant Integration
 
-This is no longer needed as mqtt will auto discover watts sensors if watts live is configured to send mqtt data!!
-
 A custom [Home Assistant](https://www.home-assistant.io/) integration for the **Watts Live** energy monitoring device.  
 It connects via MQTT and exposes real-time power, voltage, current, and energy metrics as sensors.
 
