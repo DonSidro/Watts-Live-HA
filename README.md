@@ -1,5 +1,13 @@
 # 🔌 Watts Live - Home Assistant Integration
 
+[![GitHub Release][releases-shield]][releases]
+[![GitHub Activity][commits-shield]][commits]
+[![License][license-shield]](LICENSE)
+[![hacs][hacsbadge]][hacs]
+![Project Maintenance][maintenance-shield]
+
+<a href="https://buymeacoffee.com/mitsmarthome" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 145px !important;" ></a>
+
 A custom [Home Assistant](https://www.home-assistant.io/) integration for the **Watts Live** energy monitoring device.  
 It connects via MQTT and exposes real-time power, voltage, current, and energy metrics as sensors.
 
@@ -124,3 +132,13 @@ Once connected, the following sensors will appear:
 Feel free to open issues or submit pull requests!
 
 ---
+
+
+[commits-shield]: https://img.shields.io/github/commit-activity/y/DonSidro/Watts-Live-HA.svg?style=flat-square
+[commits]: https://github.com/DonSidro/Watts-Live-HA/commits/main
+[hacs]: https://github.com/hacs/integration
+[hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/DonSidro/Watts-Live-HA.svg?style=flat-square
+[maintenance-shield]: https://img.shields.io/badge/maintainer-%40DonSidro-blue.svg?style=flat-square
+[releases-shield]: https://img.shields.io/github/release/DonSidro/Watts-Live-HA.svg?include_prereleases&style=flat-square&style=flat-square
+[releases]: https://github.com/DonSidro/Watts-Live-HA/releases
