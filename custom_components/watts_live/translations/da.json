@@ -1,18 +1,62 @@
 {
   "title": "Watts Live",
   "config": {
+    "flow_title": "{name}",
     "step": {
       "user": {
+        "title": "Watts Live konfiguration",
+        "description": "Hvordan vil du tilføje din enhed?",
+        "menu_options": {
+          "provision": "Opsæt en ny enhed via Bluetooth",
+          "manual": "Tilføj en enhed, der allerede sender data"
+        }
+      },
+      "manual": {
         "title": "Watts Live konfiguration",
         "description": "Indtast enhedens serienummer.",
         "data": {
           "name": "Serienummer"
         }
+      },
+      "provision": {
+        "title": "Opsætning via Bluetooth",
+        "description": "Vælg din Watts Live-enhed og bekræft den MQTT-broker, den skal forbinde til. Adressen skal kunne nås fra selve enheden, så brug Home Assistants IP-adresse i stedet for localhost.",
+        "data": {
+          "address": "Bluetooth-enhed",
+          "serial": "Serienummer",
+          "host": "MQTT-brokerens adresse",
+          "port": "MQTT-brokerens port",
+          "username": "MQTT-brugernavn",
+          "password": "MQTT-adgangskode",
+          "sampling_interval": "Måleinterval (sekunder)"
+        },
+        "data_description": {
+          "sampling_interval": "Hvor ofte enheden sender en måling, 5 til 3600 sekunder. Lad feltet stå tomt for at beholde enhedens nuværende indstilling. Træder i kraft, når enheden genstarter."
+        }
+      },
+      "no_data": {
+        "title": "Ingen måling endnu",
+        "description": "Der kom ingen måling fra {serial} inden for {timeout} sekunder. Det er forventeligt, hvis enheden sender målinger sjældnere end det: dens sensorer udfyldes, når den første måling kommer. Er serienummeret forkert, sker det aldrig. Hvis du lige har opsat enheden via Bluetooth, skal den måske også genstartes: tag den ud af måleren, til den holder op med at blinke.",
+        "menu_options": {
+          "add_anyway": "Tilføj enheden alligevel",
+          "manual": "Indtast serienummeret igen",
+          "provision": "Gå tilbage og ret indstillingerne"
+        }
       }
     },
+    "abort": {
+      "no_devices_found": "Ingen Bluetooth-enheder fundet. Sørg for, at enheden er tændt og inden for rækkevidde af Home Assistant eller en Bluetooth-proxy.",
+      "already_configured": "Denne enhed er allerede konfigureret."
+    },
     "errors": {
-      "no_data": "Ingen data modtaget fra enheden. Er serienummeret korrekt og enheden online?",
-      "mqtt_error": "MQTT er ikke tilgængelig eller kunne ikke abonnere. Sørg for, at MQTT er korrekt konfigureret."
+      "mqtt_error": "MQTT er ikke tilgængelig eller kunne ikke abonnere. Sørg for, at MQTT er korrekt konfigureret.",
+      "device_not_found": "Den valgte Bluetooth-enhed er ikke længere tilgængelig.",
+      "cannot_connect": "Kunne ikke forbinde til enheden via Bluetooth. Flyt den tættere på, og prøv igen.",
+      "write_failed": "Forbandt til enheden, men skrivning af konfigurationen mislykkedes.",
+      "status_disconnected": "Enheden melder, at den ikke er forbundet til brokeren. Hvis du lige har ændret indstillingerne, så genstart den ved at tage den ud af måleren, til den holder op med at blinke, og prøv igen.",
+      "status_dns_error": "Enheden kunne ikke slå brokerens adresse op. Brug en IP-adresse i stedet for et værtsnavn.",
+      "status_tcp_error": "Enheden kunne ikke nå brokeren. Tjek adresse og port, og at brokeren accepterer forbindelser fra dit netværk.",
+      "status_mqtt_error": "Brokeren afviste enhedens forbindelse. Tjek MQTT-brugernavn og -adgangskode."
     }
   },
   "entity": {

@@ -7,6 +7,7 @@ from .const import MQTT_TOPIC_TEMPLATE
 _LOGGER = logging.getLogger(__name__)
 
 async def async_subscribe_to_mqtt(hass, serial, callback):
+    """Subscribe to the device's measurements. Call the return value to unsubscribe."""
     topic = MQTT_TOPIC_TEMPLATE.format(serial=serial)
 
     async def message_received(msg):
@@ -16,4 +17,4 @@ async def async_subscribe_to_mqtt(hass, serial, callback):
         except json.JSONDecodeError:
             _LOGGER.error("Invalid JSON in MQTT payload")
 
-    await mqtt.async_subscribe(hass, topic, message_received)
+    return await mqtt.async_subscribe(hass, topic, message_received)

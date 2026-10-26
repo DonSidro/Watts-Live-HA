@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+
+# Editor settings
+.idea/
+.vscode/
+
+# Debug captures. Phone bug reports and Bluetooth logs contain personal data.
+bugreport*.zip
+*.log

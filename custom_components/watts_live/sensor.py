@@ -11,15 +11,20 @@ from homeassistant.const import (
     UnitOfElectricCurrent,
     UnitOfElectricPotential
 )
+from homeassistant.core import callback
+from homeassistant.helpers.dispatcher import (
+    async_dispatcher_connect,
+    async_dispatcher_send
+)
 from .mqtt import async_subscribe_to_mqtt
-from .const import DOMAIN
+from .const import CONF_FIRMWARE, DOMAIN, SIGNAL_MEASUREMENT
 
 
 SENSOR_DESCRIPTIONS = [
     SensorEntityDescription(
         key="positive_active_energy",
         translation_key="positive_active_energy",
-        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
         icon="mdi:home-import-outline"
@@ -135,30 +140,52 @@ SENSOR_DESCRIPTIONS = [
 
 async def async_setup_entry(hass, entry, async_add_entities):
     serial = entry.data["serial"]
-    sensors = [WattsLiveSensor(serial, description) for description in SENSOR_DESCRIPTIONS]
+    firmware = entry.data.get(CONF_FIRMWARE)
+    sensors = [
+        WattsLiveSensor(serial, description, firmware)
+        for description in SENSOR_DESCRIPTIONS
+    ]
 
     async_add_entities(sensors)
 
     async def handle_mqtt(payload):
-        for sensor in sensors:
-            if sensor.entity_description.key in payload:
-                sensor.update_value(payload[sensor.entity_description.key])
+        if isinstance(payload, dict):
+            async_dispatcher_send(
+                hass, SIGNAL_MEASUREMENT.format(serial=serial), payload
+            )
 
-    await async_subscribe_to_mqtt(hass, serial, handle_mqtt)
+    entry.async_on_unload(await async_subscribe_to_mqtt(hass, serial, handle_mqtt))
 
 
 class WattsLiveSensor(SensorEntity):
-    def __init__(self, serial: str, description: SensorEntityDescription):
+    def __init__(
+        self,
+        serial: str,
+        description: SensorEntityDescription,
+        firmware: str | None = None,
+    ):
         self.entity_description = description
         self.serial = serial
-        self._state = None
+        self.firmware = firmware
         self._attr_has_entity_name = True
-        self._attr_unique_id = f"watts_live_{description.key}"
+        self._attr_unique_id = f"{serial}_{description.key}"
 
-    @property
-    def state(self):
-        return self._state
-    
+    async def async_added_to_hass(self):
+        # Only entities that are actually added listen, so disabled or removed
+        # ones are never asked to write state.
+        self.async_on_remove(
+            async_dispatcher_connect(
+                self.hass,
+                SIGNAL_MEASUREMENT.format(serial=self.serial),
+                self._handle_measurement,
+            )
+        )
+
+    @callback
+    def _handle_measurement(self, payload):
+        if self.entity_description.key in payload:
+            self.update_value(payload[self.entity_description.key])
+
     @property
     def translation_key(self):
         return self.entity_description.key
@@ -171,11 +198,12 @@ class WattsLiveSensor(SensorEntity):
             "manufacturer": "Watts",
             "model": "Watts Live Energy Monitor",
             "connections": {("mqtt", f"watts/{self.serial}/measurement")},
+            "sw_version": self.firmware,
         }
 
     def update_value(self, value):
         try:
-            self._state = float(value)
+            self._attr_native_value = float(value)
         except (ValueError, TypeError):
-            self._state = None
+            self._attr_native_value = None
         self.async_write_ha_state()

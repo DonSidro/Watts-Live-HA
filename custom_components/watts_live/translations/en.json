@@ -1,18 +1,62 @@
 {
   "title": "Watts Live",
   "config": {
+    "flow_title": "{name}",
     "step": {
       "user": {
+        "title": "Watts Live Configuration",
+        "description": "How would you like to add your device?",
+        "menu_options": {
+          "provision": "Set up a new device over Bluetooth",
+          "manual": "Add a device that is already sending data"
+        }
+      },
+      "manual": {
         "title": "Watts Live Configuration",
         "description": "Enter the device serial number.",
         "data": {
           "name": "Serial Number"
         }
+      },
+      "provision": {
+        "title": "Set up over Bluetooth",
+        "description": "Pick your Watts Live device and confirm the MQTT broker it should connect to. The address must be reachable from the device itself, so use Home Assistant's IP address rather than localhost.",
+        "data": {
+          "address": "Bluetooth device",
+          "serial": "Serial Number",
+          "host": "MQTT broker address",
+          "port": "MQTT broker port",
+          "username": "MQTT username",
+          "password": "MQTT password",
+          "sampling_interval": "Sampling interval (seconds)"
+        },
+        "data_description": {
+          "sampling_interval": "How often the device sends a reading, 5 to 3600 seconds. Leave empty to keep the device's current setting. Takes effect after the device restarts."
+        }
+      },
+      "no_data": {
+        "title": "No reading yet",
+        "description": "No reading from {serial} arrived within {timeout} seconds. That is expected if the device sends readings less often than that: its sensors fill in when the first one arrives. If the serial number is wrong, they never will. If you just set the device up over Bluetooth, it may also need a restart: pull it out of the meter until it stops blinking.",
+        "menu_options": {
+          "add_anyway": "Add the device anyway",
+          "manual": "Enter the serial number again",
+          "provision": "Go back and change the settings"
+        }
       }
     },
+    "abort": {
+      "no_devices_found": "No Bluetooth devices found. Make sure the device is powered on and in range of Home Assistant or a Bluetooth proxy.",
+      "already_configured": "This device is already configured."
+    },
     "errors": {
-      "no_data": "No data received from the device. Is the serial number correct and the device online?",
-      "mqtt_error": "MQTT not available or failed to subscribe. Make sure MQTT is configured properly."
+      "mqtt_error": "MQTT not available or failed to subscribe. Make sure MQTT is configured properly.",
+      "device_not_found": "The selected Bluetooth device is no longer available.",
+      "cannot_connect": "Could not connect to the device over Bluetooth. Move it closer and try again.",
+      "write_failed": "Connected to the device, but writing the configuration failed.",
+      "status_disconnected": "The device reports that it is not connected to the broker. If you just changed the settings, restart it by pulling it out of the meter until it stops blinking, then try again.",
+      "status_dns_error": "The device could not resolve the broker address. Use an IP address instead of a hostname.",
+      "status_tcp_error": "The device could not reach the broker. Check the address and port, and that the broker accepts connections from your network.",
+      "status_mqtt_error": "The broker refused the device's connection. Check the MQTT username and password."
     }
   },
   "entity": {
